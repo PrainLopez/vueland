@@ -5,15 +5,16 @@ import { RouterLink } from 'vue-router';
         
 <template>
     <header>
-        <nav class="container"></nav>
-        <div class="branding">
-            <img src="src\assets\1.jpg" alt="">
-            <h1>Vue Todos</h1>
-        </div>
-        <ul class="nav-routes">
-            <RouterLink to="/">Home</RouterLink>
-            <RouterLink to="/about">About</RouterLink>
-        </ul>
+        <nav class="container">
+            <div class="branding">
+                <img src="src\assets\1.jpg" alt="">
+                <h1>Vue Todos</h1>
+            </div>
+            <ul class="nav-routes">
+                <RouterLink to="/">Home</RouterLink>
+                <RouterLink to="/about">About</RouterLink>
+            </ul>
+        </nav>
     </header>
 </template>
 
