@@ -21,5 +21,6 @@ import TodoHeader from './components/TodoHeader.vue';
 .container {
   max-width: 1100px;
   margin: 0 auto;
+  background-color: #dfdfdf;
 }
 </style>

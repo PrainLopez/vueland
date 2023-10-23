@@ -8,7 +8,7 @@ import { RouterLink } from 'vue-router';
         <nav class="container">
             <div class="branding">
                 <img src="src\assets\1.jpg" alt="">
-                <h1>Vue Todos</h1>
+                <h1>Vue <br />Todos</h1>
             </div>
             <ul class="nav-routes">
                 <RouterLink to="/">Home</RouterLink>
@@ -20,7 +20,7 @@ import { RouterLink } from 'vue-router';
 
 <style lang="scss" scoped>
 header {
-    background-color: #f1f1f1;
+    background-color: #bbb;
 
     nav {
         display: flex;
@@ -38,6 +38,8 @@ header {
 
             h1 {
                 font-size: 24px;
+                color: #36c;
+                margin-left: 0.35em;
             }
         }
 
@@ -50,7 +52,8 @@ header {
 
             a {
                 text-decoration: none;
-                color: inherit;
+                color: #36c;
+                font-size: large;
             }
         }
     }
