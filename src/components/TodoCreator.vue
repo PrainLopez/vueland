@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, reactive } from 'vue'
+import { reactive } from 'vue'
 import TodoButton from './TodoButton.vue'
 
 const emit = defineEmits(['create-todo'])
