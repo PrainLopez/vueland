@@ -9,7 +9,7 @@ import TodoHeader from './components/TodoHeader.vue'
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
+@import url('https://fonts.font.im/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap');
 
 * {
   font-family: 'Space Grotesk', sans-serif;
