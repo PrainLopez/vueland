@@ -29,7 +29,9 @@ const createTodo = () => {
     <input type="text" v-model="todoState.todo" />
     <TodoButton @click="createTodo" />
   </div>
-  <p v-show="todoState.invalid" class="err-msg">{{ todoState.errMsg }}</p>
+  <p v-show="todoState.invalid" class="err-msg">
+    {{ todoState.errMsg }}
+  </p>
 </template>
 
 <style lang="scss" scoped>
