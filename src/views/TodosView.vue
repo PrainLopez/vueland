@@ -64,9 +64,10 @@ const deleteTodo = (todoId) => {
   <main>
     <h1>Create Todo</h1>
     <TodoCreator @create-todo="addTodo" />
-    <ul class="todo-list" v-if="todoList.length > 0">
+    <ul v-if="todoList.length > 0" class="todo-list">
       <TodoItem
         v-for="(todo, index) in todoList"
+        :key="todo.id"
         :todo="todo"
         :index="index"
         @toggle-complete="toggleTodoComplete"
@@ -75,11 +76,11 @@ const deleteTodo = (todoId) => {
         @delete-todo="deleteTodo"
       />
     </ul>
-    <p class="todos-msg" v-else>
+    <p v-else class="todos-msg">
       <Icon icon="noto-v1:sad-but-relived-face" width="22" />
       <span>You have no Todo to complete! add one!</span>
     </p>
-    <p class="todos-msg" v-if="todoCompleted && todoList.length > 0">
+    <p v-if="todoCompleted && todoList.length > 0" class="todos-msg">
       You have completed all your todos, great!
     </p>
   </main>
