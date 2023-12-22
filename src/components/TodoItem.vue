@@ -27,6 +27,7 @@ defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo'])
         type="text"
         :value="todo.todo"
         @input="$emit('update-todo', $event.target.value, index)"
+        @keyup.enter="$emit('edit-todo', index)"
       />
       <span v-else :class="{ 'completed-todo': todo.isCompleted }">
         {{ todo.todo }}

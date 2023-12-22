@@ -25,12 +25,8 @@ const createTodo = () => {
 </script>
 
 <template>
-  <div
-    @keyup.enter="createTodo"
-    class="input-wrap"
-    :class="{ 'input-err': todoState.invalid }"
-  >
-    <input v-model="todoState.todo" type="text" />
+  <div class="input-wrap" :class="{ 'input-err': todoState.invalid }">
+    <input @keyup.enter="createTodo" v-model="todoState.todo" type="text" />
     <TodoButton @click="createTodo" />
   </div>
   <p v-show="todoState.invalid" class="err-msg">
