@@ -1,5 +1,6 @@
 <script setup>
 import { Icon } from '@iconify/vue'
+import { useTodoListStore } from '../stores/todoList'
 
 const props = defineProps({
   todo: {
@@ -11,7 +12,9 @@ const props = defineProps({
     required: true
   }
 })
-defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo'])
+
+const todoList = useTodoListStore()
+const { toggleComplete, toggleEdit, updateTodo, deleteTodo } = todoList
 </script>
 
 <template>
@@ -19,15 +22,15 @@ defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo'])
     <input
       type="checkbox"
       :checked="todo.isCompleted"
-      @input="$emit('toggle-complete', index)"
+      @input="toggleComplete(index)"
     />
     <div class="todo">
       <input
         v-if="todo.isEditing"
         type="text"
         :value="todo.todo"
-        @input="$emit('update-todo', $event.target.value, index)"
-        @keyup.enter="$emit('edit-todo', index)"
+        @input="updateTodo($event.target.value, index)"
+        @keyup.enter="toggleEdit(index)"
       />
       <span v-else :class="{ 'completed-todo': todo.isCompleted }">
         {{ todo.todo }}
@@ -40,7 +43,7 @@ defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo'])
         class="icon"
         color="#41b080"
         width="22"
-        @click="$emit('edit-todo', index)"
+        @click="toggleEdit(index)"
       />
       <Icon
         v-else
@@ -48,14 +51,14 @@ defineEmits(['toggle-complete', 'edit-todo', 'update-todo', 'delete-todo'])
         class="icon"
         color="#41b080"
         width="22"
-        @click="$emit('edit-todo', index)"
+        @click="toggleEdit(index)"
       />
       <Icon
         icon="ph:trash"
         class="icon"
         color="#f95e5e"
         width="22"
-        @click="$emit('delete-todo', todo.id)"
+        @click="deleteTodo(todo.id)"
       />
     </div>
   </li>

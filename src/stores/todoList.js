@@ -3,8 +3,18 @@ import { uid } from 'uid'
 
 export const useTodoListStore = defineStore('todoList', {
   state: () => ({
-    todoList: []
+    todoList: localStorage.getItem('todoList')?.todoList ?? []
   }),
+
+  watch: {
+    todoList: {
+      handler() {
+        localStorage.setItem('todoList', JSON.stringify(todoList))
+      },
+      deep: true
+    }
+  },
+
   actions: {
     addTodo(todo) {
       todoList.value.push({

@@ -1,63 +1,17 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
-import { uid } from 'uid'
+import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import TodoCreator from '../components/TodoCreator.vue'
 import TodoItem from '../components/TodoItem.vue'
+import { useTodoListStore } from '../stores/todoList'
+import { storeToRefs } from 'pinia'
 
-const todoList = ref([])
-
-watch(
-  todoList,
-  () => {
-    setTodoListLocalStorage()
-  },
-  {
-    deep: true
-  }
-)
+const store = useTodoListStore()
+const { todoList } = storeToRefs(store)
 
 const todoCompleted = computed(() => {
   return todoList.value.every((todo) => todo.isCompleted)
 })
-
-const fetchTodoList = () => {
-  const savedTodoList = JSON.parse(localStorage.getItem('todoList'))
-  if (savedTodoList) {
-    todoList.value = savedTodoList
-  }
-}
-
-fetchTodoList()
-
-const setTodoListLocalStorage = () => {
-  localStorage.setItem('todoList', JSON.stringify(todoList.value))
-}
-
-const addTodo = (todo) => {
-  todoList.value.push({
-    id: uid(),
-    todo,
-    isCompleted: null,
-    isEditing: null
-  })
-}
-
-const toggleTodoComplete = (todoPos) => {
-  todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted
-}
-
-const toggleEditTodo = (todoPos) => {
-  todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing
-}
-
-const updateTodo = (todoVal, todoPos) => {
-  todoList.value[todoPos].todo = todoVal
-}
-
-const deleteTodo = (todoId) => {
-  todoList.value = todoList.value.filter((todo) => todo.id !== todoId)
-}
 </script>
 
 <template>
@@ -66,14 +20,10 @@ const deleteTodo = (todoId) => {
     <TodoCreator @create-todo="addTodo" />
     <ul v-if="todoList.length > 0" class="todo-list">
       <TodoItem
-        v-for="(todo, index) in todoList"
+        v-for="(todo, index) of todoList"
         :key="todo.id"
         :todo="todo"
         :index="index"
-        @toggle-complete="toggleTodoComplete"
-        @edit-todo="toggleEditTodo"
-        @update-todo="updateTodo"
-        @delete-todo="deleteTodo"
       />
     </ul>
     <p v-else class="todos-msg">

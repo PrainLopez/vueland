@@ -1,14 +1,17 @@
 <script setup>
 import { reactive } from 'vue'
 import TodoButton from './TodoButton.vue'
+import { useTodoListStore } from '../stores/todoList'
 
-const emit = defineEmits(['create-todo'])
+const todoList = useTodoListStore()
+const { addTodo } = todoList
 
 const todoState = reactive({
   todo: '',
   invalid: null,
   errMsg: ''
 })
+
 const createTodo = () => {
   if (!todoState.todo) {
     todoState.invalid = true
@@ -16,7 +19,7 @@ const createTodo = () => {
     return
   }
   todoState.invalid = false
-  emit('create-todo', todoState.todo)
+  addTodo(todoState.todo)
 
   todoState.todo = ''
   todoState.errMsg = ''
