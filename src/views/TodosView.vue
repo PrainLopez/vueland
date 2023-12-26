@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia'
 
 const store = useTodoListStore()
 const { todoList } = storeToRefs(store)
+const { addTodo } = store
 
 const todoCompleted = computed(() => {
   return todoList.value.every((todo) => todo.isCompleted)

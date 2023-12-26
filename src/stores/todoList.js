@@ -17,15 +17,7 @@ export const useTodoListStore = defineStore('todoList', {
 
   actions: {
     addTodo(todo) {
-      todoList.value.push({
-        id: uid(),
-        todo,
-        isCompleted: null,
-        isEditing: null
-      })
-    },
-    addTodo(todo) {
-      todoList.value.push({
+      this.todoList.push({
         id: uid(),
         todo,
         isCompleted: null,
@@ -34,19 +26,19 @@ export const useTodoListStore = defineStore('todoList', {
     },
 
     toggleComplete(todoPos) {
-      todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted
+      this.todoList[todoPos].isCompleted = !this.todoList[todoPos].isCompleted
     },
 
     toggleEdit(todoPos) {
-      todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing
+      this.todoList[todoPos].isEditing = !this.todoList[todoPos].isCompleted
     },
 
     updateTodo(todoVal, todoPos) {
-      todoList.value[todoPos].todo = todoVal
+      this.todoList[todoPos].todo = todoVal
     },
 
     deleteTodo(todoId) {
-      todoList.value = todoList.value.filter((todo) => todo.id !== todoId)
+      this.todoList = this.todoList.filter((todo) => todo.id !== todoId)
     }
   }
 })
