@@ -9,7 +9,7 @@ export const useTodoListStore = defineStore('todoList', {
   watch: {
     todoList: {
       handler() {
-        localStorage.setItem('todoList', JSON.stringify(todoList))
+        localStorage.setItem('todoList', JSON.stringify(this.todoList))
       },
       deep: true
     }
