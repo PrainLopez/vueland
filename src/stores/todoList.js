@@ -30,7 +30,7 @@ export const useTodoListStore = defineStore('todoList', {
     },
 
     toggleEdit(todoPos) {
-      this.todoList[todoPos].isEditing = !this.todoList[todoPos].isCompleted
+      this.todoList[todoPos].isEditing = !this.todoList[todoPos].isEditing
     },
 
     updateTodo(todoVal, todoPos) {
