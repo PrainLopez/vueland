@@ -1,17 +1,16 @@
 import { defineStore } from 'pinia'
 import { uid } from 'uid'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-/* 
 export const useTodoListStore = defineStore('todoList', {
   state: () => ({
-    todoList: localStorage.getItem('todoList')?.todoList ?? []
+    todoList: JSON.parse(localStorage.getItem('todoList')?.todoList ?? '[]')
   }),
 
   watch: {
     todoList: {
       handler() {
-        localStorage.setItem('todoList', JSON.stringify(this.todoList))
+        console.log(JSON.stringify(this.todoList))
       },
       deep: true
     }
@@ -44,10 +43,10 @@ export const useTodoListStore = defineStore('todoList', {
     }
   }
 })
- */
 
+/* 
 export const useTodoListStore = defineStore('todoList', () => {
-  const todoList = ref([])
+  const todoList = ref(JSON.parse(localStorage.getItem('todoList')) ?? [])
 
   function addTodo(todo) {
     this.todoList.push({
@@ -85,3 +84,4 @@ export const useTodoListStore = defineStore('todoList', () => {
     deleteTodo
   }
 })
+ */
