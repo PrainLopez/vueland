@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 import { uid } from 'uid'
 import { ref, watch } from 'vue'
-/* 
+/*  watch option just don't work here
 export const useTodoListStore = defineStore('todoList', {
   state: () => ({
-    todoList: JSON.parse(localStorage.getItem('todoList')?.todoList ?? '[]')
+    todoList: JSON.parse(localStorage.getItem('todoList') ?? '[]')
   }),
 
   watch: {
     todoList: {
-      handler() {
-        console.log(JSON.stringify(this.todoList))
+      handler(newValue) {
+        console.log(JSON.stringify(newValue))
       },
       deep: true
     }
