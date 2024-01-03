@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { uid } from 'uid'
 import { ref, watch } from 'vue'
-
+/* 
 export const useTodoListStore = defineStore('todoList', {
   state: () => ({
     todoList: JSON.parse(localStorage.getItem('todoList')?.todoList ?? '[]')
@@ -43,13 +43,21 @@ export const useTodoListStore = defineStore('todoList', {
     }
   }
 })
+ */
 
-/* 
 export const useTodoListStore = defineStore('todoList', () => {
-  const todoList = ref(JSON.parse(localStorage.getItem('todoList')) ?? [])
+  const todoList = ref(JSON.parse(localStorage.getItem('todoList') ?? '[]'))
+
+  watch(
+    todoList,
+    (newValue) => {
+      localStorage.setItem('todoList', JSON.stringify(newValue))
+    },
+    { deep: true }
+  )
 
   function addTodo(todo) {
-    this.todoList.push({
+    todoList.value.push({
       id: uid(),
       todo,
       isCompleted: null,
@@ -58,19 +66,19 @@ export const useTodoListStore = defineStore('todoList', () => {
   }
 
   function toggleComplete(todoPos) {
-    this.todoList[todoPos].isCompleted = !this.todoList[todoPos].isCompleted
+    todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted
   }
 
   function toggleEdit(todoPos) {
-    this.todoList[todoPos].isEditing = !this.todoList[todoPos].isEditing
+    todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing
   }
 
   function updateTodo(todoVal, todoPos) {
-    this.todoList[todoPos].todo = todoVal
+    todoList.value[todoPos].todo = todoVal
   }
 
   function deleteTodo(todoId) {
-    this.todoList = this.todoList.filter((todo) => todo.id !== todoId)
+    todoList.value = todoList.value.filter((todo) => todo.id !== todoId)
   }
 
   return {
@@ -84,4 +92,3 @@ export const useTodoListStore = defineStore('todoList', () => {
     deleteTodo
   }
 })
- */
