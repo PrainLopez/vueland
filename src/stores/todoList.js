@@ -51,6 +51,7 @@ export const useTodoListStore = defineStore('todoList', () => {
   watch(
     todoList,
     (newValue) => {
+      // only can use newValue here, can't directly get todoList inside
       localStorage.setItem('todoList', JSON.stringify(newValue))
     },
     { deep: true }
